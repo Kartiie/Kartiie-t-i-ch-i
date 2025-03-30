@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Enzyme Essay Questions by Lâm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2em;
+        }
+        .decor {
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+        .chapter {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .chapter.active {
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .next-btn {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        #password-screen {
+            display: block;
+        }
+        #password-screen.hidden {
+            display: none;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Màn hình mật khẩu -->
+        <div id="password-screen">
+            <h1>Nhập mật khẩu để truy cập</h1>
+            <input type="password" id="password-input" placeholder="Mật khẩu">
+            <button onclick="checkPassword()">Xác nhận</button>
+            <p id="error" style="color: red; display: none;">Mật khẩu sai!</p>
+        </div>
+
+        <!-- Phần bìa -->
+        <div id="cover" style="display: none;">
+            <h1>Welcome to Enzyme Essay Questions by Lâm</h1>
+            <p class="decor">✨✨✨ Enzyme Knowledge Unleashed ✨✨✨</p>
+            <p>Compiled and designed by Lâm</p>
+            <p>Chuẩn bị khám phá thế giới enzyme!</p>
+            <button onclick="startLearning()">Bắt đầu học</button>
+        </div>
+
+        <!-- Các chương (nội dung chi tiết) -->
+        <div id="chapter1" class="chapter">
+            <h2>CHƯƠNG 1: Cơ bản về enzyme</h2>
+            <p><b>Câu 1: Enzyme là gì? Đặc điểm chung?</b><br>
+            - <b>Định nghĩa</b>: Enzyme là protein có hoạt tính xúc tác sinh học, được tổng hợp bởi tế bào sống, có khả năng xúc tác cho các phản ứng sinh hóa trong cơ thể.<br>
+            - <b>Đặc điểm</b>:<br>
+              + Tính đặc hiệu cao: Chỉ tác động lên một loại cơ chất hoặc phản ứng nhất định.<br>
+              + Hiệu quả xúc tác mạnh: Tăng tốc độ phản ứng lên hàng triệu lần.<br>
+              + Hoạt động ở điều kiện ôn hòa: Nhiệt độ và pH tối ưu thường gần với điều kiện sinh lý.<br>
+              + Nhạy cảm với nhiệt độ, pH: Mất hoạt tính nếu vượt ngưỡng tối ưu.<br>
+              + Có trung tâm hoạt động: Vùng gắn kết đặc hiệu với cơ chất.<br>
+              + Không bị tiêu hao trong phản ứng: Sau phản ứng, enzyme vẫn giữ nguyên.<br>
+              + Hoạt tính có thể điều hòa: Bị ảnh hưởng bởi chất ức chế hoặc hoạt hóa.</p>
+            <p><b>Câu 2: Phân loại enzyme theo IUB?</b><br>
+            - Oxidoreductase: Xúc tác phản ứng oxi hóa-khử (chuyển electron).<br>
+            - Transferase: Xúc tác chuyển vị các nhóm chức từ phân tử này sang phân tử khác.<br>
+            - Hydrolase: Xúc tác phản ứng thủy phân (phá vỡ liên kết bằng nước).<br>
+            - Lyase: Xúc tác phân cắt liên kết không qua thủy phân (tạo liên kết đôi hoặc vòng).<br>
+            - Isomerase: Xúc tác phản ứng đồng phân hóa (chuyển đổi giữa các đồng phân).<br>
+            - Ligase: Xúc tác phản ứng tổng hợp, tạo liên kết đồng hóa trị, thường cần năng lượng từ ATP.</p>
+            <button class="next-btn" onclick="nextChapter()">Kế tiếp</button>
+        </div>
+
+        <div id="chapter2" class="chapter">
+            <h2>CHƯƠNG 2: Động học enzyme</h2>
+            <p><b>Câu 1: Phương trình Michaelis-Menten và Lineweaver-Burk?</b><br>
+            - <b>Michaelis-Menten</b>:<br>
+              + Thành lập: Dựa trên mô hình E + S ⇌ ES → E + P tại trạng thái cân bằng.<br>
+              + Phương trình: v = (Vmax × [S]) / (Km + [S])<br>
+              + Ý nghĩa: Mô tả quan hệ giữa vận tốc phản ứng (v) và nồng độ cơ chất ([S]); Km là nồng độ cơ chất khi vận tốc đạt nửa tối đa (Vmax/2), thể hiện ái lực enzyme-cơ chất.<br>
+            - <b>Lineweaver-Burk</b>:<br>
+              + Thành lập: Nghịch đảo của phương trình Michaelis-Menten.<br>
+              + Phương trình: 1/v = (Km/Vmax)(1/[S]) + 1/Vmax<br>
+              + Ý nghĩa: Biến đổi đồ thị hyperbol thành đường thẳng, giúp xác định Km, Vmax và phân tích kiểu ức chế (cạnh tranh, không cạnh tranh).</p>
+            <p><b>Câu 2: Yếu tố ảnh hưởng đến hoạt động enzyme?</b><br>
+            - Nhiệt độ: Tăng nhiệt độ tăng vận tốc, nhưng quá cao làm biến tính enzyme.<br>
+            - pH: Mỗi enzyme có pH tối ưu, lệch khỏi gây mất hoạt tính.<br>
+            - Nồng độ enzyme: Tăng tỷ lệ thuận với vận tốc phản ứng nếu cơ chất dư.<br>
+            - Nồng độ cơ chất: Tăng đến ngưỡng bão hòa thì vận tốc đạt Vmax.<br>
+            - Chất ức chế: Làm giảm hoặc ngừng hoạt động enzyme (cạnh tranh, không cạnh tranh).<br>
+            - Chất hoạt hóa/đồng yếu tố: Tăng hoạt tính enzyme (kim loại, coenzyme).<br>
+            - Áp suất: Ảnh hưởng đến cấu trúc enzyme, thường ít gặp trong điều kiện sinh lý.</p>
+            <button class="next-btn" onclick="nextChapter()">Kế tiếp</button>
+        </div>
+
+        <div id="chapter3" class="chapter">
+            <h2>CHƯƠNG 3: Sản xuất enzyme</h2>
+            <p><b>Câu 1: Sản xuất enzyme từ động vật?</b><br>
+            - <b>Enzyme pancreatin</b>:<br>
+              + Quy trình: Lấy tụy heo → Loại bỏ mỡ và mô liên kết → Pha với nước cất (1:1), tự phân ở 20°C → Lọc tách dịch (dùng H₂SO₄ 0,25N tỷ lệ 2:1, điều chỉnh pH 3,5-4,0) → Kết tủa bằng (NH₄)₂SO₄ 60-70% → Ly tâm lấy tủa → Sấy tủa ở 40°C → Nghiền nhỏ → Thu pancreatin thô.</p>
+            <p><b>Câu 2: Sản xuất enzyme từ vi sinh vật?</b><br>
+            - <b>Enzyme protease</b>:<br>
+              + Quy trình: Chọn giống vi sinh vật (Bacillus subtilis) → Nhân giống trong môi trường thích hợp → Lên men (nuôi cấy trong bình lên men) → Tách ly enzyme từ dịch lên men → Kết tủa enzyme → Tinh chế (lọc, sắc ký) → Khảo sát hoạt tính → Sấy khô → Đóng gói → Thành phẩm.</p>
+            <p><b>Câu 3: Sản xuất enzyme từ thực vật?</b><br>
+            - <b>Enzyme bromelin</b>:<br>
+              + Quy trình: Lấy quả, thân, chồi dứa → Xay nhuyễn → Lọc lấy dịch → Ly tâm để thu bã và dịch ly tâm → Thu chế phẩm bromelin thô từ dịch → Sấy khô → Tinh sạch (sắc ký, kết tủa) → Sản phẩm enzyme tinh khiết.</p>
+            <button class="next-btn" onclick="nextChapter()">Kế tiếp</button>
+        </div>
+
+        <div id="chapter4" class="chapter">
+            <h2>CHƯƠNG 4: Ứng dụng enzyme</h2>
+            <p><b>Câu 1: Enzyme amylase?</b><br>
+            - <b>Sản phẩm</b>: Sản xuất bia và bánh mì.<br>
+            - <b>Cơ chế tác động</b>:<br>
+              + α-amylase: Cắt liên kết α-1,4 glucoside trong tinh bột, tạo dextrin và ít maltose.<br>
+              + β-amylase: Cắt liên kết α-1,4 glucoside từ đầu mạch, tạo maltose.<br>
+              + Amyloglucosidase: Cắt liên kết α-1,4 và α-1,6 glucoside, tạo D-glucose.<br>
+              + Pullulanase & Isomylase: Cắt liên kết α-1,6 glucoside, tạo dextrin và polysaccharide mạch thẳng.<br>
+            - <b>Công đoạn sử dụng</b>:<br>
+              + Bia: Đường hóa (α-amylase chuyển tinh bột thành dextrin, β-amylase tạo đường lên men) → Lên men (cung cấp đường cho men bia tạo ethanol).<br>
+              + Bánh mì: Nhào bột (phân hủy tinh bột thành dextrin, maltose → cung cấp đường lên men, tăng độ đàn hồi) → Lên men (đường cho men tạo CO₂, giúp bột nở, tăng độ xốp và hương vị).</p>
+            <p><b>Câu 2: Enzyme pectinase?</b><br>
+            - <b>Sản phẩm</b>: Sản xuất rượu vang và nước ép nho.<br>
+            - <b>Cơ chế tác động</b>:<br>
+              + Pectin esterase: Loại bỏ nhóm methyl khỏi pectin, tạo pectate và methanol.<br>
+              + Pectin lyase: Phân cắt mạch pectin, tạo acid galacturonic và oligosaccharides.<br>
+              + Endo-polygalacturonase: Phân hủy ngẫu nhiên chuỗi pectin, tạo oligosaccharides.<br>
+              + Exo-polygalacturonase: Phân hủy từ đầu chuỗi pectin, tạo acid galacturonic.<br>
+            - <b>Công đoạn sử dụng</b>:<br>
+              + Rượu vang: Dùng trong bước làm trong và lọc rượu.<br>
+              + Nước ép: Dùng sau khi ép (tăng hiệu suất, giảm độ nhớt) và trước khi lọc (làm trong).</p>
+            <p><b>Câu 3: Enzyme lactose?</b><br>
+            - <b>Ứng dụng</b>: Dùng enzyme β-galactosidase (lactase) trong chế biến thực phẩm.<br>
+              + Thủy phân lactose trong sữa cho người bất dung nạp lactose.<br>
+              + Thủy phân whey để tăng độ ngọt trong thực phẩm.<br>
+            - <b>Cơ chế tác động</b>: Enzyme β-galactosidase phân cắt liên kết β-1,4 glycosidic trong lactose, tạo ra glucose và galactose.<br>
+            - <b>Công đoạn sử dụng</b>:<br>
+              + Sữa: Xử lý để giảm lactose, phù hợp cho người không dung nạp.<br>
+              + Whey: Thủy phân lactose trong whey để tăng độ ngọt cho sản phẩm.</p>
+            <button class="next-btn" onclick="nextChapter()">Kế tiếp</button>
+        </div>
+
+        <div id="end" class="chapter">
+            <h1>🎉 HOÀN THÀNH! 🎉</h1>
+            <p>Bạn đã học xong tất cả các chương về enzyme.<br>Chúc bạn thi tự luận thật tốt!</p>
+        </div>
+    </div>
+
+    <script>
+        let currentChapter = -1;
+        const correctPassword = "hoanglamdeptrai";
+
+        function checkPassword() {
+            const input = document.getElementById("password-input").value;
+            if (input === correctPassword) {
+                document.getElementById("password-screen").classList.add("hidden");
+                document.getElementById("cover").style.display = "block";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+
+        function startLearning() {
+            document.getElementById("cover").style.display = "none";
+            currentChapter = 0;
+            showChapter();
+        }
+
+        function showChapter() {
+            const chapters = document.getElementsByClassName("chapter");
+            for (let i = 0; i < chapters.length; i++) {
+                chapters[i].classList.remove("active");
+            }
+            if (currentChapter < chapters.length) {
+                chapters[currentChapter].classList.add("active");
+            }
+        }
+
+        function nextChapter() {
+            currentChapter++;
+            if (currentChapter < 4) {
+                showChapter();
+            } else {
+                document.getElementById("end").classList.add("active");
+            }
+        }
+    </script>
+</body>
+</html>
